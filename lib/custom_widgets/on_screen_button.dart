@@ -10,22 +10,25 @@ class OnScreenButton extends StatelessWidget {
       {super.key,
       this.textColor = Colors.white,
       this.buttonColor = Colors.white24,
-      this.buttonText,
       this.buttonTap,
-      this.textSize = 26});
+        this.buttonText,
+      this.textSize = 27});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: buttonTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(60),
-        child: Container(
-          alignment: Alignment.center,
-          color: buttonColor,
-          child: Text(
-            buttonText!,
-            style: TextStyle(fontSize: textSize, color: textColor),
+      child: Padding(
+        padding: const EdgeInsets.all(6),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(22),
+          child: Container(
+            alignment: Alignment.center,
+            color: buttonColor,
+            child: Text(
+              buttonText!,
+              style: TextStyle(fontSize: textSize, color: textColor),
+            ),
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 final List<String> screenButtons = [
   'C',
   'DEL',
-  '/',
+  '÷',
   '×',
   '7',
   '8',
@@ -20,7 +20,7 @@ final List<String> screenButtons = [
   '(',
   ')'
 ];
-double buttonSize = 105;
+double buttonSize = 95;
 int totalButtons = 4;
 var userQuestion = '';
 var userAnswer = '';

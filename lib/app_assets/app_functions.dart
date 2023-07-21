@@ -3,7 +3,7 @@ import 'package:math_expressions/math_expressions.dart';
 import 'info.dart';
 
 bool specialOperators(String x) {
-  if (x == '/' ||
+  if (x == '÷' ||
       x == '×' ||
       x == '-' ||
       x == '+' ||
@@ -19,6 +19,7 @@ bool specialOperators(String x) {
 void equalPressed() {
   String finalQuestion = userQuestion;
   finalQuestion = finalQuestion.replaceAll('×', '*');
+  finalQuestion = finalQuestion.replaceAll('÷', '/');
 
   Parser p = Parser();
   Expression exp = p.parse(finalQuestion);
