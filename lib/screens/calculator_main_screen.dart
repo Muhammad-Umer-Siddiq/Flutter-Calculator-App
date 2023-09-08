@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../app_assets/app_colors.dart';
-import '../app_assets/app_functions.dart';
-import '../app_assets/info.dart';
-import '../custom_widgets/custom_containers.dart';
-import '../custom_widgets/on_screen_button.dart';
+import '../utilities/imports.dart';
 
 class CalculatorMainScreen extends StatefulWidget {
   const CalculatorMainScreen({super.key});
@@ -17,88 +11,88 @@ class _CalculatorMainScreenState extends State<CalculatorMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: AppColors.bgColor,
       body: Column(
         children: [
           Flexible(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(height: 36),
-              CustomContainer(
-                insideText: userQuestion,
-              ),
+              const CustomSizedBox(height: 36),
+              CustomContainer(insideText: AppValues.userQuestion),
               CustomContainer(
                   childAlignment: Alignment.centerRight,
-                  insideText: userAnswer,
+                  insideText: AppValues.userAnswer,
                   topPadding: 1,
                   textSize: 50),
             ],
           )),
           Expanded(
             flex: 2,
-            child: SizedBox(
+            child: CustomSizedBox(
               child: GridView.builder(
-                itemCount: screenButtons.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisExtent: buttonSize, crossAxisCount: totalButtons),
+                itemCount: AppValues.screenButtons.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisExtent: AppValues.buttonSize,
+                    crossAxisCount: AppValues.totalButtons),
                 itemBuilder: (context, index) {
                   // Clear Button
-                  if (index == 0) {
-                    return OnScreenButton(
-                      buttonTap: () {
-                        setState(() {
-                          userQuestion = '';
-                          userAnswer = '';
-                        });
-                      },
-                      buttonText: screenButtons[index],
-                      buttonColor: clearButtonColor,
+                  if (AppValues.screenButtons[index] == 'C') {
+                    return ButtonTile(
+                      buttonSingleTap: () => setState(() {
+                        AppValues.userQuestion = '';
+                        AppValues.userAnswer = '';
+                      }),
+                      buttonText: AppValues.screenButtons[index],
+                      buttonColor: AppColors.clearButtonColor,
                     );
                   }
+
                   // Delete Button
-                  else if (index == 1) {
-                    return OnScreenButton(
-                      buttonTap: () {
-                        setState(() {
-                          userQuestion = userQuestion.substring(
-                              0, userQuestion.length - 1);
-                        });
-                      },
-                      buttonText: screenButtons[index],
-                      buttonColor: deleteButtonColor,
+                  else if (AppValues.screenButtons[index] == 'DEL') {
+                    return ButtonTile(
+                      buttonLongPress: () => setState(() {
+                        AppValues.userQuestion = '';
+                        AppValues.userAnswer = '0';
+                      }),
+                      buttonSingleTap: () => setState(() {
+                        AppValues.userQuestion = AppValues.userQuestion
+                            .substring(0, AppValues.userQuestion.length - 1);
+                      }),
+                      buttonText: AppValues.screenButtons[index],
+                      buttonColor: AppColors.deleteButtonColor,
                     );
                   }
+
                   // Equals to Button
-                  else if (index == screenButtons.length - 3) {
-                    return OnScreenButton(
-                      buttonTap: () {
-                        setState(() {
-                          equalPressed();
-                        });
-                      },
+                  else if (AppValues.screenButtons[index] == '=') {
+                    return ButtonTile(
+                      buttonSingleTap: () =>
+                          setState(() => CalculatorHelpers.equalPressed()),
                       textSize: 40,
-                      textColor: Colors.black,
-                      buttonText: screenButtons[index],
-                      buttonColor: Colors.white70,
+                      textColor: AppColors.equalsTextColor,
+                      buttonText: AppValues.screenButtons[index],
+                      buttonColor: AppColors.equalsButtonColor,
                     );
                   }
 
                   // Rest Buttons
                   else {
-                    return OnScreenButton(
-                      buttonTap: () {
-                        setState(() {
-                          userQuestion += screenButtons[index];
-                        });
-                      },
-                      buttonText: screenButtons[index],
-                      textColor: specialOperators(screenButtons[index])
-                          ? Colors.white // For special operators
-                          : Colors.black,
-                      buttonColor: specialOperators(screenButtons[index])
-                          ? specialOperatorColor
-                          : numbersButtonColor,
+                    return ButtonTile(
+                      buttonSingleTap: () => setState(() {
+                        AppValues.userQuestion +=
+                            AppValues.screenButtons[index];
+                      }),
+                      buttonText: AppValues.screenButtons[index],
+                      textColor: CalculatorHelpers.specialOperators(
+                              AppValues.screenButtons[index])
+                          ? AppColors
+                              .specialOperatorTextColor // For special operators
+                          : AppColors.numbersTextColor,
+                      buttonColor: CalculatorHelpers.specialOperators(
+                              AppValues.screenButtons[index])
+                          ? AppColors.specialOperatorButtonColor
+                          : AppColors.numbersButtonColor,
                     );
                   }
                 },

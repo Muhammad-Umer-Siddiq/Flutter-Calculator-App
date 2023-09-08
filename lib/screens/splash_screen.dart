@@ -1,7 +1,4 @@
-import 'dart:async';
-
-import 'package:calculator_app/screens/calculator_main_screen.dart';
-import 'package:flutter/material.dart';
+import '../utilities/imports.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,7 +11,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -33,8 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset(
                 'assets/images/calculator app Icon google.png',
-                height: 170,
-                width: 170,
+                height: 160,
+                width: 160,
               ),
               const Text(
                 "Calculate at your fingertips !",
