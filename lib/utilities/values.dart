@@ -19,7 +19,7 @@ class AppValues {
     '0',
     '=',
     '(',
-    ')'
+    ')',
   ];
   static const double buttonSize = 95;
   static const int totalButtons = 4;
